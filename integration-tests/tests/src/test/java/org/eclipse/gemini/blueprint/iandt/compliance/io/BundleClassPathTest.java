@@ -44,8 +44,6 @@ import static org.junit.Assert.*;
  *
  * @author Costin Leau
  */
-@RunWith(PaxExam.class)
-@ContextConfiguration
 public class BundleClassPathTest extends BaseIoTest {
     @Override
     protected boolean shouldWaitForSpringBundlesContextCreation() {

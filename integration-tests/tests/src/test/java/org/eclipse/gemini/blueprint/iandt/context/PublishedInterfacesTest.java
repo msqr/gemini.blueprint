@@ -17,25 +17,13 @@ import org.eclipse.gemini.blueprint.context.ConfigurableOsgiBundleApplicationCon
 import org.eclipse.gemini.blueprint.context.support.OsgiBundleXmlApplicationContext;
 import org.eclipse.gemini.blueprint.test.AbstractBlueprintTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.ops4j.pax.exam.Configuration;
-import org.ops4j.pax.exam.Option;
-import org.ops4j.pax.exam.OptionUtils;
-import org.ops4j.pax.exam.junit.PaxExam;
-import org.ops4j.pax.exam.util.PathUtils;
 import org.osgi.framework.Constants;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.Version;
-import org.springframework.test.context.ContextConfiguration;
 
-import java.io.File;
 import java.util.Arrays;
 
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.blueprintDefaults;
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.withConsole;
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.withLogging;
 import static org.junit.Assert.assertEquals;
-import static org.ops4j.pax.exam.CoreOptions.options;
 
 //TODO: Revisit this test: OsgiBXAC has more interfaces vs. the annon version.
 
@@ -44,16 +32,7 @@ import static org.ops4j.pax.exam.CoreOptions.options;
  *
  * @author Costin Leau
  */
-@RunWith(PaxExam.class)
-@ContextConfiguration
 public class PublishedInterfacesTest extends AbstractBlueprintTest {
-
-
-    @Configuration
-    public Option[] config() {
-        return options(blueprintDefaults(),
-                withLogging(new File(PathUtils.getBaseDir() + "/target/test-classes/logback.xml").toURI()));
-    }
 
     @Test
     public void testEmptyApplicationContext() throws Exception {

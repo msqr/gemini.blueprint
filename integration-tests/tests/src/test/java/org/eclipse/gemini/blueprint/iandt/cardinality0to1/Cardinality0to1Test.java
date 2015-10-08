@@ -15,7 +15,6 @@
 
 package org.eclipse.gemini.blueprint.iandt.cardinality0to1;
 
-import java.io.File;
 import java.io.FilePermission;
 import java.security.Permission;
 import java.util.List;
@@ -25,22 +24,13 @@ import org.eclipse.gemini.blueprint.iandt.BaseIntegrationTest;
 import org.eclipse.gemini.blueprint.iandt.cardinality0to1.test.MyListener;
 import org.eclipse.gemini.blueprint.iandt.cardinality0to1.test.ReferenceContainer;
 import org.eclipse.gemini.blueprint.service.ServiceUnavailableException;
-import org.eclipse.gemini.blueprint.test.AbstractBlueprintTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
-import org.ops4j.pax.exam.junit.PaxExam;
-import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
-import org.ops4j.pax.exam.spi.reactors.PerMethod;
-import org.ops4j.pax.exam.util.PathUtils;
 import org.osgi.framework.AdminPermission;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleException;
 import org.springframework.test.context.ContextConfiguration;
 
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.blueprintDefaults;
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.withLogging;
 import static org.junit.Assert.*;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.CoreOptions.options;
@@ -48,17 +38,16 @@ import static org.ops4j.pax.exam.CoreOptions.options;
 /**
  * @author Hal Hildebrand Date: Dec 6, 2006 Time: 6:04:42 PM
  */
-@RunWith(PaxExam.class)
-@ExamReactorStrategy(PerMethod.class)
 @ContextConfiguration(locations = {"classpath:org/eclipse/gemini/blueprint/iandt/bundleScope/scope-context.xml"})
 public class Cardinality0to1Test extends BaseIntegrationTest {
 
-    @Configuration
-    public Option[] config() {
-        return options(blueprintDefaults(),
-                withLogging(new File(PathUtils.getBaseDir() + "/target/test-classes/logback.xml").toURI()),
+    @Override
+    public Option[] getExtraConfig()
+    {
+        return options(
                 mavenBundle("org.eclipse.gemini.blueprint.iandt", "simple.service").versionAsInProject(),
-                mavenBundle("org.eclipse.gemini.blueprint.iandt", "cardinality0to1").versionAsInProject());
+                mavenBundle("org.eclipse.gemini.blueprint.iandt", "cardinality0to1").versionAsInProject()
+        );
     }
 
     @Test

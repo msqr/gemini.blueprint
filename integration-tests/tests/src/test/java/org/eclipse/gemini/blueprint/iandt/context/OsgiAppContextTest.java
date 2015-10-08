@@ -14,43 +14,22 @@
 
 package org.eclipse.gemini.blueprint.iandt.context;
 
-import java.io.File;
 
 import org.eclipse.gemini.blueprint.context.ConfigurableOsgiBundleApplicationContext;
 import org.eclipse.gemini.blueprint.test.AbstractBlueprintTest;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.ops4j.pax.exam.Configuration;
-import org.ops4j.pax.exam.Option;
-import org.ops4j.pax.exam.OptionUtils;
-import org.ops4j.pax.exam.junit.PaxExam;
-import org.ops4j.pax.exam.util.PathUtils;
 import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
 
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.blueprintDefaults;
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.withConsole;
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.withLogging;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.ops4j.pax.exam.CoreOptions.options;
 
 /**
  * Integration test on the functionality offered by OSGi app context.
  *
  * @author Costin Leau
  */
-@RunWith(PaxExam.class)
-@ContextConfiguration
 public class OsgiAppContextTest extends AbstractBlueprintTest {
-
-    @Configuration
-    public Option[] config() {
-        return options(blueprintDefaults(),
-                withLogging(new File(PathUtils.getBaseDir() + "/target/test-classes/logback.xml").toURI()));
-    }
 
     @Test
     public void testBundleContextAvailableAsBean() {

@@ -14,6 +14,11 @@ import static org.ops4j.pax.exam.CoreOptions.*;
  */
 public class BlueprintOptions {
 
+    public static Option[] defaultConfig() {
+        return options(
+                blueprintDefaults(),
+                withLogging(new File(PathUtils.getBaseDir() + "/target/test-classes/logback.xml").toURI()));
+    }
 
      /*
     // FIXME: the JAXP package (for 1.4 VMs) should be discovered in an OSGi manner

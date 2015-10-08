@@ -11,7 +11,6 @@ import java.util.PropertyPermission;
 
 import org.eclipse.gemini.blueprint.test.AbstractBlueprintTest;
 import org.eclipse.gemini.blueprint.util.OsgiStringUtils;
-import org.junit.Before;
 import org.osgi.framework.*;
 import org.osgi.service.permissionadmin.PermissionAdmin;
 import org.osgi.service.permissionadmin.PermissionInfo;

@@ -1,13 +1,8 @@
 package org.eclipse.gemini.blueprint.iandt;
 
-import java.io.File;
-
 import org.ops4j.pax.exam.Option;
-import org.ops4j.pax.exam.util.PathUtils;
 
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.blueprintDefaults;
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.withLogging;
-import static org.ops4j.pax.exam.CoreOptions.options;
+import static org.eclipse.gemini.blueprint.test.BlueprintOptions.defaultConfig;
 
 /**
  * Created by dsklyut on 12/1/14.
@@ -15,6 +10,6 @@ import static org.ops4j.pax.exam.CoreOptions.options;
 public class ITConfiguration implements org.ops4j.pax.exam.ConfigurationFactory {
     @Override
     public Option[] createConfiguration() {
-        return options(blueprintDefaults(), withLogging(new File(PathUtils.getBaseDir() + "/target/test-classes/logback.xml").toURI()));
+        return defaultConfig();
     }
 }

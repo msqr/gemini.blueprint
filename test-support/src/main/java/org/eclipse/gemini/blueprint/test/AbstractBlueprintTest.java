@@ -1,5 +1,6 @@
 package org.eclipse.gemini.blueprint.test;
 
+import java.io.File;
 import java.util.Enumeration;
 
 import org.eclipse.gemini.blueprint.context.BundleContextAware;
@@ -10,16 +11,27 @@ import org.eclipse.gemini.blueprint.util.OsgiBundleUtils;
 import org.eclipse.gemini.blueprint.util.OsgiListenerUtils;
 import org.eclipse.gemini.blueprint.util.OsgiStringUtils;
 import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.ops4j.pax.exam.Configuration;
+import org.ops4j.pax.exam.Option;
+import org.ops4j.pax.exam.junit.PaxExam;
+import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
+import org.ops4j.pax.exam.spi.reactors.PerMethod;
+import org.ops4j.pax.exam.util.PathUtils;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
+import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
+import org.osgi.util.tracker.ServiceTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.BootstrapWith;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestContextManager;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
@@ -27,11 +39,21 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 
+import static org.eclipse.gemini.blueprint.test.BlueprintOptions.blueprintDefaults;
+import static org.eclipse.gemini.blueprint.test.BlueprintOptions.defaultConfig;
+import static org.eclipse.gemini.blueprint.test.BlueprintOptions.withLogging;
+import static org.ops4j.pax.exam.CoreOptions.composite;
+import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
+import static org.ops4j.pax.exam.CoreOptions.options;
+
 /**
  * Created by dsklyut on 11/12/14.
  */
 @BootstrapWith(BlueprintContextBootstrap.class)
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class})
+@RunWith (PaxExam.class)
+@ExamReactorStrategy (PerMethod.class)
+@ContextConfiguration
 public abstract class AbstractBlueprintTest implements ApplicationContextAware, BundleContextAware {
 
 
@@ -49,6 +71,18 @@ public abstract class AbstractBlueprintTest implements ApplicationContextAware, 
         logger = LoggerFactory.getLogger(getClass());
     }
 
+    @Configuration
+    public Option[] config()
+    {
+        return options(
+                composite(defaultConfig()),
+                composite(getExtraConfig()));
+    }
+
+    public Option[] getExtraConfig() {
+        return null;
+    }
+
     @Before
     public void initSpringTestHarness() throws Exception {
         testContextManager = new TestContextManager(getClass());
@@ -57,7 +91,6 @@ public abstract class AbstractBlueprintTest implements ApplicationContextAware, 
         postProcessBundleContext(bundleContext);
 
     }
-
 
     public final void setApplicationContext(ApplicationContext applicationContext) {
         Assert.isInstanceOf(ConfigurableApplicationContext.class, applicationContext, "Must be an instance of ConfigurableApplicationContext");
@@ -234,4 +267,25 @@ public abstract class AbstractBlueprintTest implements ApplicationContextAware, 
         Enumeration enm = bundle.findEntries("META-INF/spring", "*.xml", false);
         return (enm != null && enm.hasMoreElements());
     }
+
+    private static final String TEST_MAVEN_GROUP_ID = "org.eclipse.gemini.blueprint.iandt";
+
+    public Bundle installTestBundle(final String bundleId) throws BundleException
+    {
+        final String bundleUrl = mavenBundle(TEST_MAVEN_GROUP_ID, bundleId).versionAsInProject().getURL();
+        return bundleContext.installBundle(bundleUrl);
+    }
+
+    public Bundle installAndStartTestBundle(final String bundleId) throws BundleException
+    {
+        final Bundle bundle =  installTestBundle(bundleId);
+        bundle.start();
+        return bundle;
+    }
+
+    public ServiceTracker serviceTrackerWithFilter(final String filter) throws InvalidSyntaxException
+    {
+        return new ServiceTracker(bundleContext, bundleContext.createFilter(filter), null);
+    }
+
 }

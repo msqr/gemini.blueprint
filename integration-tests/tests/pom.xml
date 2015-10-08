@@ -138,6 +138,13 @@
 
         <dependency>
             <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>simple.service3</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
             <artifactId>cardinality0to1</artifactId>
             <version>${project.parent.version}</version>
             <scope>provided</scope>
@@ -173,6 +180,202 @@
         <dependency>
             <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
             <artifactId>io.fragment.2.bundle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>deadlock</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>async-nowait-bundle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>async-wait-bundle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>nopublish-bundle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>sync-nowait-bundle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>sync-wait-bundle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>sync-tail-bundle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>config-with-dots.bundle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>dependencies</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>extender.listener.bundle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>error</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>jdk.proxy</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>proxy.creator</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>tccl</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>tccl.intf</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>export-import-dependency-bundle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>proxy.destruction</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>reference.proxy</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>dependendencies.factory</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>simple.service.identical</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>simple.service.2.identical</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>extender-version-bundle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>extender-fragment-bundle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>lifecycle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>ns.own.consumer</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>proxy.listener</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>service.listener</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.gemini.blueprint.iandt</groupId>
+            <artifactId>recursive</artifactId>
             <version>${project.parent.version}</version>
             <scope>provided</scope>
         </dependency>

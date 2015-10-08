@@ -14,21 +14,17 @@
 
 package org.eclipse.gemini.blueprint.iandt.compliance.io;
 
-import java.io.File;
 import java.io.FilePermission;
-import java.io.InputStream;
 import java.security.Permission;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
 import org.eclipse.gemini.blueprint.iandt.BaseIntegrationTest;
-import org.eclipse.gemini.blueprint.test.BlueprintContextBootstrap;
 import org.eclipse.gemini.blueprint.test.FilteringProbeBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.ops4j.pax.exam.*;
-import org.ops4j.pax.exam.util.PathUtils;
 import org.osgi.framework.AdminPermission;
 import org.osgi.framework.Bundle;
 import org.springframework.core.io.ContextResource;
@@ -38,11 +34,8 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.eclipse.gemini.blueprint.io.OsgiBundleResourceLoader;
 import org.eclipse.gemini.blueprint.io.OsgiBundleResourcePatternResolver;
-import org.springframework.test.context.BootstrapWith;
 import org.springframework.util.ObjectUtils;
 
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.blueprintDefaults;
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.withLogging;
 import static org.junit.Assert.assertTrue;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.CoreOptions.options;
@@ -70,7 +63,7 @@ public abstract class BaseIoTest extends BaseIntegrationTest {
 
 	protected String[] getBundleContentPattern() {
 		return ObjectUtils.addObjectToArray(super.getBundleContentPattern(),
-			"org/eclipse/gemini/blueprint/iandt/io/BaseIoTest.class");
+			"org/eclipse/gemini/blueprint/iandt/compliance/io/BaseIoTest.class");
 	}
 
 	@Before
@@ -109,13 +102,13 @@ public abstract class BaseIoTest extends BaseIntegrationTest {
 		return builder;
 	}
 
-	@Configuration
-	public Option[] config() {
+	@Override
+	public Option[] getExtraConfig()
+	{
 		return options(
-				blueprintDefaults(),
-				withLogging(new File(PathUtils.getBaseDir() + "/target/test-classes/logback.xml").toURI()),
 				mavenBundle("org.eclipse.gemini.blueprint.iandt", "io.fragment.1.bundle").versionAsInProject().start(false),
-				mavenBundle("org.eclipse.gemini.blueprint.iandt", "io.fragment.2.bundle").versionAsInProject().start(false));
+				mavenBundle("org.eclipse.gemini.blueprint.iandt", "io.fragment.2.bundle").versionAsInProject().start(false)
+		);
 	}
 
 	protected Object[] copyEnumeration(Enumeration enm) {

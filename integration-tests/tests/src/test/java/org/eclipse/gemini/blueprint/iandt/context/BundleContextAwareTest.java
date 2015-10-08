@@ -13,36 +13,23 @@
  *****************************************************************************/
 package org.eclipse.gemini.blueprint.iandt.context;
 
-import java.io.File;
 import java.io.Serializable;
 
 import org.eclipse.gemini.blueprint.context.BundleContextAware;
 import org.eclipse.gemini.blueprint.context.ConfigurableOsgiBundleApplicationContext;
 import org.eclipse.gemini.blueprint.test.AbstractBlueprintTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.ops4j.pax.exam.Configuration;
-import org.ops4j.pax.exam.Option;
-import org.ops4j.pax.exam.junit.PaxExam;
-import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
-import org.ops4j.pax.exam.spi.reactors.PerMethod;
-import org.ops4j.pax.exam.util.PathUtils;
 import org.osgi.framework.BundleContext;
 import org.springframework.test.context.ContextConfiguration;
 
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.blueprintDefaults;
-import static org.eclipse.gemini.blueprint.test.BlueprintOptions.withLogging;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
-import static org.ops4j.pax.exam.CoreOptions.options;
 
 /**
  * Test injection of BundleContextAware.
  *
  * @author Costin Leau
  */
-@RunWith(PaxExam.class)
-@ExamReactorStrategy(PerMethod.class)
 @ContextConfiguration(locations = {"classpath:org/eclipse/gemini/blueprint/iandt/context/bundleContextAwareTest.xml"})
 public class BundleContextAwareTest extends AbstractBlueprintTest {
 
@@ -61,12 +48,6 @@ public class BundleContextAwareTest extends AbstractBlueprintTest {
         private static class AnotherInnerClass implements Serializable {
 
         }
-    }
-
-    @Configuration
-    public Option[] config() {
-        return options(blueprintDefaults(),
-                withLogging(new File(PathUtils.getBaseDir() + "/target/test-classes/logback.xml").toURI()));
     }
 
     @Test
