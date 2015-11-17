@@ -1,0 +1,35 @@
+plugins { id 'org.hidetake.ssh' version '1.1.4' }
+
+remotes {
+    eclipseDotOrg {
+        host = ECLIPSE_ORG_FTP_HOST
+        user =  ECLIPSE_ORG_FTP_USER
+        identity = file(System.properties['user.home'] + "/.ssh/${ECLIPSE_ORG_FTP_IDENTITY}")
+        knownHosts = file(System.properties['user.home'] + "/.ssh/known_hosts")
+    }
+}
+
+def version = '2.0.0.M03'
+def groupId = 'org.eclipse.virgo.mirrored'
+def mirrorPath = ECLIPSE_ORG_FTP_MIRROR_PATH
+
+task uploadGeminiBlueprint << {
+    [
+        "io",
+        "core",
+        "extender"
+    ].each { module ->
+        println "Uploading ${module} to ${remotes.eclipseDotOrg.host}..."
+        def modulePath = "${groupId}/org.eclipse.gemini.blueprint.${module}/${version}"
+        ssh.run {
+            session(remotes.eclipseDotOrg) {
+                execute "mkdir -p ${mirrorPath}/${modulePath}"
+                put from: "${buildDir}/${modulePath}/ivy-${version}.xml", into: "${mirrorPath}/${modulePath}"
+                put from: "${buildDir}/${modulePath}/ivy-${version}.xml.sha1", into: "${mirrorPath}/${modulePath}"
+                put from: "${buildDir}/${modulePath}/org.eclipse.gemini.blueprint.${module}-${version}.jar", into: "${mirrorPath}/${modulePath}"
+                put from: "${buildDir}/${modulePath}/org.eclipse.gemini.blueprint.${module}-${version}.jar.sha1", into: "${mirrorPath}/${modulePath}"
+            }
+        }
+        println "done."
+    }
+}

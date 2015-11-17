@@ -1,0 +1,38 @@
+apply plugin: 'ivy-publish'
+
+buildscript {
+    repositories { mavenCentral() }
+    dependencies {
+        classpath 'org.apache.ivy:ivy:2.4.0'
+        classpath 'com.jcraft:jsch:0.1.53'
+    }
+}
+
+def version = '2.0.0.M03'
+
+publishing {
+    publications {
+        blueprintIo(IvyPublication) {
+            organisation 'org.eclipse.virgo.mirrored'
+            module 'org.eclipse.gemini.blueprint.io'
+            revision "${version}"
+            artifact(file("io/target/gemini-blueprint-io-${version}.jar"))
+        }
+        blueprintCore(IvyPublication) {
+            organisation 'org.eclipse.virgo.mirrored'
+            module 'org.eclipse.gemini.blueprint.core'
+            revision "${version}"
+            artifact(file("core/target/gemini-blueprint-core-${version}.jar"))
+        }
+        blueprintExtender(IvyPublication) {
+            organisation 'org.eclipse.virgo.mirrored'
+            module 'org.eclipse.gemini.blueprint.extender'
+            revision "${version}"
+            artifact(file("extender/target/gemini-blueprint-extender-${version}.jar"))
+        }
+    }
+
+    repositories {
+        ivy { url "$buildDir" }
+    }
+}
