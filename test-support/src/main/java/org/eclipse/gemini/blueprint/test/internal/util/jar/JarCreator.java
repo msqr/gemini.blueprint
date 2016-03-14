@@ -134,8 +134,16 @@ public class JarCreator {
 	 */
 	private String determineRelativeName(String rootPath, Resource resource) {
 		try {
+
 			String path = StringUtils.cleanPath(resource.getURL().toExternalForm());
-			return path.substring(path.indexOf(rootPath) + rootPath.length());
+			log.debug("resource path: " + path);
+			log.debug("root path: " + rootPath);
+
+			String relativePath = path.substring(path.indexOf(rootPath) + rootPath.length());
+
+			log.debug("relative path: " + relativePath);
+
+			return relativePath;
 		}
 		catch (IOException ex) {
 			throw (RuntimeException) new IllegalArgumentException("illegal resource " + resource.toString()).initCause(ex);
