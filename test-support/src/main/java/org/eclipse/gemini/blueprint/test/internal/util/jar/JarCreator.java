@@ -135,7 +135,7 @@ public class JarCreator {
 	private String determineRelativeName(String rootPath, Resource resource) {
 		try {
 
-			String path = StringUtils.cleanPath(resource.getURL().toExternalForm());
+			String path = StringUtils.cleanPath(resource.getURL().getPath());
 			log.debug("resource path: " + path);
 			log.debug("root path: " + rootPath);
 
