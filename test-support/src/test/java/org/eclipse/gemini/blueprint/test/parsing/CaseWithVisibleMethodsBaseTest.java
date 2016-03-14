@@ -33,11 +33,19 @@ public abstract class CaseWithVisibleMethodsBaseTest extends AbstractConfigurabl
 		ResourceLoader fileLoader = new DefaultResourceLoader();
 		try {
 			String classFile = CaseWithVisibleMethodsBaseTest.class.getName().replace('.', '/').concat(".class");
+			logger.debug("Root path detection: Class file: " + classFile);
 			Resource res = fileLoader.getResource(classFile);
 			String fileLocation = "file:/" + res.getFile().getAbsolutePath();
+			logger.debug("Root path detection: file location: " + fileLocation);
 			String classFileToPlatform = CaseWithVisibleMethodsBaseTest.class.getName().replace('.', File.separatorChar).concat(
 				".class");
-			return fileLocation.substring(0, fileLocation.indexOf(classFileToPlatform));
+			logger.debug("Root path detection: platform class file path: " + classFileToPlatform);
+
+			logger.debug("Root path detection: platform class file path: " + classFileToPlatform);
+			String rootPath = fileLocation.substring(0, fileLocation.indexOf(classFileToPlatform));
+
+			logger.debug("Root path detection: resolved root path: " + rootPath);
+			return rootPath;
 		}
 		catch (Exception ex) {
 		}
