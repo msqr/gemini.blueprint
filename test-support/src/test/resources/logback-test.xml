@@ -6,6 +6,7 @@
     </encoder>
   </appender>
   <logger name="org.springframework.osgi" level="TRACE"/>
+  <logger name="org.eclipse.gemini.blueprint" level="TRACE" />
   <root level="WARN">
     <appender-ref ref="stdout"/>
   </root>
