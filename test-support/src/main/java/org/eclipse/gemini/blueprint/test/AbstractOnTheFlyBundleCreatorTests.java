@@ -14,20 +14,6 @@
 
 package org.eclipse.gemini.blueprint.test;
 
-import java.io.IOException;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.jar.Attributes;
-import java.util.jar.Manifest;
-
 import org.eclipse.gemini.blueprint.test.internal.util.DependencyVisitor;
 import org.eclipse.gemini.blueprint.test.internal.util.jar.JarCreator;
 import org.eclipse.gemini.blueprint.util.OsgiStringUtils;
@@ -38,11 +24,14 @@ import org.osgi.framework.Constants;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.util.Assert;
-import org.springframework.util.ClassUtils;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
+import org.springframework.util.*;
+
+import java.io.IOException;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
+import java.util.*;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
 
 /**
  * Enhanced subclass of {@link AbstractDependencyManagerTests} that facilitates
@@ -118,7 +107,7 @@ public abstract class AbstractOnTheFlyBundleCreatorTests extends AbstractDepende
 	 * @return root path given as a String
 	 */
 	protected String getRootPath() {
-		return Thread.currentThread().getContextClassLoader().getResource(".").toString();
+		return getClass().getResource(".").getFile();
 	}
 
 	/**
