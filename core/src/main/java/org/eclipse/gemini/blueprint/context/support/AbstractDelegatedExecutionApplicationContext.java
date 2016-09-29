@@ -66,6 +66,8 @@ import org.springframework.util.ObjectUtils;
 public abstract class AbstractDelegatedExecutionApplicationContext extends AbstractOsgiBundleApplicationContext
 		implements DelegatedExecutionOsgiBundleApplicationContext {
 
+	private final Set<Integer> registriesPostProcessed = new HashSet<Integer>();
+
 	/**
 	 * Executor that offers the traditional way of <code>refreshing</code>/ <code>closing</code> of an
 	 * ApplicationContext (no conditions have to be met and the refresh happens in only one step).
@@ -383,8 +385,10 @@ public abstract class AbstractDelegatedExecutionApplicationContext extends Abstr
 		// Invoke BeanDefinitionRegistryPostProcessors first, if any.
 		Set<String> processedBeans = new HashSet<String>();
 
-		if (beanFactory instanceof BeanDefinitionRegistry) {
+		int beanFactoryId = System.identityHashCode(beanFactory);
+		if (beanFactory instanceof BeanDefinitionRegistry && !this.registriesPostProcessed.contains(beanFactoryId)) {
 			BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
+			this.registriesPostProcessed.add(beanFactoryId);
 			List<BeanFactoryPostProcessor> regularPostProcessors = new LinkedList<BeanFactoryPostProcessor>();
 			List<BeanDefinitionRegistryPostProcessor> registryPostProcessors =
 					new LinkedList<BeanDefinitionRegistryPostProcessor>();
